@@ -22,7 +22,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Main {
-
     public static final List<String> Exclusions = Arrays.asList("Main.java");
     static Comparator<File> datecmp = new Comparator<File>() {
         @Override

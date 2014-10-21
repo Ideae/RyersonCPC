@@ -1,46 +1,66 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.util.Scanner;
 @ProblemName(name = "8queens")
-public class EightQueens {
-
-    static boolean[] cols = new boolean[8];
-    static boolean[] minus = new boolean[16];
-    static boolean[] plus= new boolean[16];
-
-    public static void main(String[] Args) {
+public class Eightqueens {
+    static int[] cols;
+    public static void main(String[] args) {
+	// write your code here
         Scanner sc = new Scanner(System.in);
-        for (int y = 0; y < 8; y++) {
-            String line = sc.nextLine();
-            int x = -1;
-            for (int i = 0; i < 8; i++) {
-                if (line.charAt(i) == '*') {
-                    if (x == -1) {
-                        x = i;
-                    } else {
+        cols = new int[8];
+        for(int i = 0; i < 8; i++)
+        {
+            cols[i] = -1;
+        }
+        String line = "";
+        for(int r = 0; r < 8; r++)
+        {
+            line = sc.nextLine();
+            boolean found = false;
+            for(int c = 0; c < 8; c++)
+            {
+                char ch = line.charAt(c);
+                if (ch == '*')
+                {
+                    if (found)
+                    {
                         System.out.println("invalid");
                         return;
                     }
+                    else if (cols[c] != -1)
+                    {
+                        System.out.println("invalid");
+                        return;
+                    }
+                    cols[c] = r;
+                    found = true;
                 }
             }
-            if (x==-1){
+            if (!found)
+            {
                 System.out.println("invalid");
                 return;
             }
-
-                int plusIndex = x+y;
-                int minusIndex = x-y + 8;
-
-                if(cols[x] || plus[plusIndex]||minus[minusIndex]){
-                    System.out.println("invalid");
-                    return;
-                }else{
-                    cols[x]=true;
-                    plus[plusIndex]=true;
-                    minus[minusIndex]=true;
-                }
+        }
+        for(int i = 0; i < 8; i++)
+        {
+            if (backtrack(i))
+            {
+                return;
+            }
         }
         System.out.println("valid");
+    }
 
+    static boolean backtrack(int c)
+    {
+        for(int cc = 0; cc < c; cc++)
+        {
+            if (Math.abs(cols[cc] - cols[c]) == Math.abs(cc - c))
+            {
+                System.out.println("invalid");
+                return true;
+            }
+        }
+        return false;
     }
 }

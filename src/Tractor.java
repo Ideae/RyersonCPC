@@ -1,36 +1,46 @@
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
-/**
- * Created by Dante on 2014-09-27.
- */
 public class Tractor {
-
-    public static void main(String[] Args) {
+    static boolean[][] grid;
+    static HashMap<Integer, HashSet<Integer>> mapOfSets;
+    static int a, b;
+    public static void main(String[] args) {
+	// write your code here
         Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();//int y = sc.nextInt();
-        int log = Log2(x);
-        int size = ipow(2, log);
-    }
-
-    public static int Log2(int ii){
-        int i;
-        for (i = 0; ii > 0; ii>>=1, i++);
-        return  i;
-    }
-
-    static int ipow(int base, int exp)
-    {
-        int result = 1;
-        while (exp!=0)
+        int n = sc.nextInt();
+        for(int i = 0; i < n;i++)
         {
-            if ((exp & 1) == 0)
-                result *= base;
-            exp >>= 1;
-            base *= base;
+            a = sc.nextInt() + 1;
+            b = sc.nextInt() + 1;
+            count = 0;
+            //grid = new boolean[a][b];
+            mapOfSets = new HashMap<Integer, HashSet<Integer>>();
+            recurse(0,0,1);
+            System.out.println(count);
         }
-
-        return result;
+    }
+    static int count = 0;
+    static void recurse(int x, int y, int level)
+    {
+        if (x >= a || y >= b)
+        {
+            return;
+        }
+        if ((mapOfSets.containsKey(x) && mapOfSets.get(x).contains(y)))
+        {
+            System.out.printf("OVERLAP: %d %d\n", x, y);
+            return;
+        }
+        if (!mapOfSets.containsKey(x)) mapOfSets.put(x, new HashSet<Integer>());
+        mapOfSets.get(x).add(y);
+        //grid[x][y] = true;
+        //System.out.printf("%d %d\n",x, y);
+        count++;
+        int moves = (int)Math.pow(2, level-1);
+        recurse(x + moves, y, level + 1);
+        recurse(x, y + moves, level + 1);
     }
 }

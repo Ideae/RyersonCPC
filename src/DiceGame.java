@@ -1,27 +1,54 @@
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Created by Dante on 2014-10-09.
- */
 public class DiceGame {
-    public static void main(String[] Args) {
+
+    public static void main(String[] args) {
+	// write your code here
         Scanner sc = new Scanner(System.in);
-        double g = AverageRoll(sc.nextInt(),sc.nextInt(),sc.nextInt(),sc.nextInt());
-        double e = AverageRoll(sc.nextInt(),sc.nextInt(),sc.nextInt(),sc.nextInt());
+        ArrayList<Integer> gSums = getSums(sc);
+        ArrayList<Integer> eSums = getSums(sc);
 
-        if(g > e) System.out.println("Gunnar");
-        else if(e>g) System.out.println("Emma");
-        else System.out.println("Tie");
-    }
-
-    private static double AverageRoll(int d1min, int d1max, int d2min, int d2max) {
-        int total = 0;
-        int count = 0;
-        for (int i = d1min; i <= d1max; i++) {
-            for (int j = d2min; j <= d2max; j++) {
-                total += (i+j); count++;
+        int gWins = 0;
+        for(int i = 0; i < gSums.size(); i++)
+        {
+            for(int j = 0; j < eSums.size(); j++)
+            {
+                int g = gSums.get(i);
+                int e = eSums.get(j);
+                if (g > e) gWins++;
+                else if (g < e) gWins--;
             }
         }
-        return (double)total / (double)count;
+        if (gWins > 0)
+        {
+            System.out.println("Gunnar");
+        }
+        else if (gWins < 0)
+        {
+            System.out.println("Emma");
+        }
+        else
+        {
+            System.out.println("Tie");
+        }
+    }
+
+    static ArrayList<Integer> getSums(Scanner sc)
+    {
+        int ga1 = sc.nextInt();
+        int ga2 = sc.nextInt();
+        int ga3 = sc.nextInt();
+        int ga4 = sc.nextInt();
+        ArrayList<Integer> sums = new ArrayList<Integer>();
+        for(int i = ga1; i <= ga2; i++)
+        {
+            for(int j = ga3; j <= ga4; j++)
+            {
+                sums.add(i+j);
+            }
+        }
+        return sums;
     }
 }

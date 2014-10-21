@@ -1,22 +1,33 @@
+
 import java.util.Scanner;
 
-/**
- * Created by Dante on 2014-10-09.
- */
 public class TheSequence {
+    static int[] memo = new int[10100];
+    public static void main(String[] args) {
+	// write your code here
 
-    public static void main(String[] Args) {
         Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
+        int start = sc.nextInt();
+        int end = sc.nextInt();
 
-        for (int i = Math.min(a, b); i <= Math.max(a, b); i++) {
-            System.out.println(ThreeNTraverse(i));
+        for(int i = start; i <= end; i++)
+        {
+            findLength(i);
         }
     }
-    private static int ThreeNTraverse(int n) {
-        if(n ==1) return 0;
-        if(n%2 == 0) return 1+ ThreeNTraverse(n/2);
-        else return 1+ ThreeNTraverse(3*n + 1);
+    static void findLength(int a)
+    {
+        if (memo[a] == 0)
+        {
+            int steps = 0, val = a;
+            while(val > 1)
+            {
+                if (val % 2 == 0) val /= 2;
+                else val = 3 * val + 1;
+                steps++;
+            }
+            memo[a] = steps;
+        }
+        System.out.println(memo[a]);
     }
 }

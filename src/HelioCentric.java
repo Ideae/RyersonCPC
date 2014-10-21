@@ -1,28 +1,28 @@
+
 import java.util.Scanner;
 
-/**
- * Created by Dante on 2014-10-20.
- */
-public class HelioCentric {
-    public static void main(String[] Args) {
+public class Heliocentric {
+
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int caseNum = 0;
-        while(sc.hasNextInt()){
-            caseNum++;
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            int counter = 0;
-            if (a!=0||b!=0) {
-                a= (a+(687-b))%365;
-                counter+=(687-b);
-                if (a!=0) {
-                    while (a != 0) {
-                        a = (a+687) % 365;
-                        counter+=687;
-                    }
+        int counter = 1;
+        while(sc.hasNextInt())
+        {
+            int earth = sc.nextInt();
+            int mars = sc.nextInt();
+            long days = 0;
+            while (true)
+            {
+                if (earth == 0 && mars == 0)
+                {
+                    System.out.println("Case " + counter++ + ": " + days);
+                    break;
                 }
+                int diff = 687 - mars;
+                days += diff;
+                earth = (earth + diff) % 365;
+                mars = (mars + diff) % 687;
             }
-            System.out.println("Case "+caseNum+": "+counter);
         }
     }
 }
