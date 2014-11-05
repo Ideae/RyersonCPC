@@ -2,16 +2,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeSet;
-
-public class FlexibleSpaces {
+public class Flexible {
 
     public static void main(String[] args) {
 	// write your code here
         TreeSet<Integer> set = new TreeSet<Integer>();
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         int max = sc.nextInt();
         int n = sc.nextInt();
+
         list.add(0);
         for (int i = 0; i < n; i++)
         {
