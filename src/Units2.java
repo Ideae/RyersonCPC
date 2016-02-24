@@ -44,11 +44,11 @@ public class Units2 {
                 int val = Integer.parseInt(sc.next());
                 String name2 = sc.next();
                 if (!map.containsKey(name)) {
-                    map.put(name, new HashMap<>());
+                    map.put(name, new HashMap<String, Unit>());
                 }
                 map.get(name).put(name2, new Unit(name2, val, false));
                 if (!map.containsKey(name2)) {
-                    map.put(name2, new HashMap<>());
+                    map.put(name2, new HashMap<String, Unit>());
                 }
                 map.get(name2).put(name, new Unit(name, val, true));
             }

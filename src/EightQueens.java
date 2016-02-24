@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 @ProblemName(name = "8queens")
-public class Eightqueens {
+public class EightQueens {
     static int[] cols;
     public static void main(String[] args) {
 	// write your code here
